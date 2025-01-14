@@ -32,6 +32,9 @@ export class MailService {
                 <strong>Email :</strong> ${createMailDTO.email}
             </p>
             <p style="margin: 0; padding: 10px 0; font-size: 16px;">
+                <strong>Email :</strong> ${createMailDTO.subject}
+            </p>
+            <p style="margin: 0; padding: 10px 0; font-size: 16px;">
                 <strong>Message :</strong>
             </p>
             <blockquote style="margin: 10px 0; padding: 15px; font-size: 16px; background-color: #e8f5e9; border-left: 5px solid #4CAF50; border-radius: 4px;">
@@ -39,7 +42,7 @@ export class MailService {
             </blockquote>
             <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
             <footer style="text-align: center; color: #666; font-size: 14px;">
-                <p>Ce message vous a été envoyé depuis <a href="https://arktik-dev.com" style="color: #4CAF50; text-decoration: none;">arktik-dev.com</a>.</p>
+                <p>Ce message vous a été envoyé depuis <a href="https://agenceacapela.fr" style="color: #4CAF50; text-decoration: none;">arktik-dev.com</a>.</p>
             </footer>
         </div>
     `;

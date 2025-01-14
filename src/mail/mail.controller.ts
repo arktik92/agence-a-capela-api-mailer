@@ -6,11 +6,10 @@ import { CreateMailDTO } from './dto/CreateMailDTO';
 export class MailController {
     constructor(private readonly mailService: MailService) {}
 
-// Recuperer message depuis frontend
-@Post("to")
-send(@Body() createMailDTO: CreateMailDTO) {
-    return this.mailService.send(createMailDTO)
-}
-
-// renvoyer message
+    // Recuperer message depuis frontend
+    @Post("to")
+    send(@Body() createMailDTO: CreateMailDTO) {
+        console.log(createMailDTO)
+        return this.mailService.send(createMailDTO)
+    }
 }

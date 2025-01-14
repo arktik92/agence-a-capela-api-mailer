@@ -6,5 +6,7 @@ export class CreateMailDTO {
     @IsNotEmpty()
     readonly email: string
     @IsNotEmpty()
+    readonly subject: string
+    @IsNotEmpty()
     readonly message: string
 }

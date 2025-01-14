@@ -32,7 +32,7 @@ export class MailService {
                 <strong>Email :</strong> ${createMailDTO.email}
             </p>
             <p style="margin: 0; padding: 10px 0; font-size: 16px;">
-                <strong>Email :</strong> ${createMailDTO.subject}
+                <strong>Sujet :</strong> ${createMailDTO.subject}
             </p>
             <p style="margin: 0; padding: 10px 0; font-size: 16px;">
                 <strong>Message :</strong>

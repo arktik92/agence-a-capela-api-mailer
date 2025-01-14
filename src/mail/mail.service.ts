@@ -42,7 +42,7 @@ export class MailService {
             </blockquote>
             <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
             <footer style="text-align: center; color: #666; font-size: 14px;">
-                <p>Ce message vous a été envoyé depuis <a href="https://agenceacapela.fr" style="color: #4CAF50; text-decoration: none;">arktik-dev.com</a>.</p>
+                <p>Ce message vous a été envoyé depuis <a href="https://agenceacapela.fr" style="color: #4CAF50; text-decoration: none;">agenceacapela.fr</a>.</p>
             </footer>
         </div>
     `;

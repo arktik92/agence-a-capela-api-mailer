@@ -40,6 +40,7 @@ export class MailService {
             <blockquote style="margin: 10px 0; padding: 15px; font-size: 16px; background-color: #e8f5e9; border-left: 5px solid #4CAF50; border-radius: 4px;">
                 ${createMailDTO.message}
             </blockquote>
+            <a href="mailto:${createMailDTO.email}" className="bg-green text-white rounded-lg">Repondre</a>
             <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
             <footer style="text-align: center; color: #666; font-size: 14px;">
                 <p>Ce message vous a été envoyé depuis <a href="https://agenceacapela.fr" style="color: #4CAF50; text-decoration: none;">agenceacapela.fr</a>.</p>
@@ -48,7 +49,7 @@ export class MailService {
     `;
 
         (await this.transporter()).sendMail({
-            from: "contact@arktik-dev.com",
+            from: "noreply@agenceacapla.fr",
             to: this.configService.get("SMTP_USER"),
             subject: `${createMailDTO.name} souhaite vous contacter`,
             html: htmlContent,

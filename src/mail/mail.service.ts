@@ -49,8 +49,10 @@ export class MailService {
     `;
 
         (await this.transporter()).sendMail({
-            from: "noreply@agenceacapla.fr",
-            to: this.configService.get("SMTP_USER"),
+            from: "noreply@arktik-dev.com",
+            to: "contact@agenceacapela.fr",
+            // TODO: - a remettre mail smtp...
+            // to: this.configService.get("SMTP_USER"),
             subject: `${createMailDTO.name} souhaite vous contacter`,
             html: htmlContent,
         })

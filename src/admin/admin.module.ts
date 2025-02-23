@@ -4,10 +4,12 @@ import { AdminService } from './admin.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './dto/User';
 import { Event } from './dto/Event';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './strategy.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, Event])],
+  imports: [TypeOrmModule.forFeature([User, Event]), JwtModule.register({})],
   controllers: [AdminController],
-  providers: [AdminService]
+  providers: [AdminService, JwtStrategy]
 })
 export class AdminModule {}

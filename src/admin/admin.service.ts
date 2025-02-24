@@ -18,6 +18,31 @@ export class AdminService {
         private readonly jwtService: JwtService
     ) {}
 
+    async signup(user: User): Promise<{data: string}> {
+        const userDTO = await this.usersRepository.findOneBy({email: user.email})
+
+        if (userDTO) throw new UnauthorizedException('This email is already registered')
+
+        const saltRounds = 10
+        const salt = await bcrypt.genSalt(saltRounds)
+        
+        console.log("password to hash: ", user.password);
+        
+        const hashedPassword = await bcrypt.hash(user.password, salt)
+        console.log("hashedPassword:", hashedPassword)
+
+        const newUser = this.usersRepository.create({
+            email: user.email,
+            password: hashedPassword
+        })
+
+        await this.usersRepository.save(newUser)
+        
+
+        return {data: "User succesfully created"}
+
+    }
+
     async login(user: User): Promise<{data: string}> {
         const userDTO = await this.usersRepository.findOneBy({email: user.email})
         
@@ -48,15 +73,20 @@ export class AdminService {
         return {data: token}
     }
 
-    async createEvent(event: Event): Promise<void> {
+    async createEvent(event: Event): Promise<{data: string}> {
         // Add Images
         const {title, description, image} = event
 
-        this.eventRepository.create({
+        const newEvent = this.eventRepository.create({
             title,
             description,
             image
         }) 
+
+        await this.eventRepository.save(event)
+
+
+        return {data: "Event was created successfuly"}
     }
 
     async readOne(id: number): Promise<Event> {
@@ -67,7 +97,8 @@ export class AdminService {
         return this.eventRepository.find()
     }
 
-    async delete(id: number): Promise<void> {
+    async delete(id: number): Promise<{data: string}> {
         await this.eventRepository.delete(id)
+        return { data: "Event was deleted successfuly"}
     }
 }

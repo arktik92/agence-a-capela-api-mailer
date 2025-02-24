@@ -10,6 +10,6 @@ async function bootstrap() {
   })
   
   app.useGlobalPipes(new ValidationPipe())
-  await app.listen(process.env.PORT ?? 3000, '0.0.0.0');
+  await app.listen(process.env.PORT ?? 8080 /* TODO: - remettre 3000  */, '0.0.0.0');
 }
 bootstrap();

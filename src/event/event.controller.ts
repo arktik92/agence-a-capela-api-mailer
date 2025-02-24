@@ -5,7 +5,7 @@ import { EventService } from './event.service';
 export class EventController {
     constructor(private readonly eventService: EventService) {}
 
-    @Get('event/read')
+    @Get('read')
     readAll() {
         return this.eventService.readAll()
     }

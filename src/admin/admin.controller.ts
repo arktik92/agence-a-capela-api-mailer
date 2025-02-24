@@ -13,7 +13,6 @@ export class AdminController {
         return this.adminService.signup(user)
     }
 
-
     @Post('login')
     login(@Body() user: User) {
         return this.adminService.login(user)

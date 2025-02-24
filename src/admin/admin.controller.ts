@@ -31,11 +31,6 @@ export class AdminController {
         return this.adminService.readOne(id)
     }
 
-    @Get('event/read')
-    readAll() {
-        return this.adminService.readAll()
-    }
-
     @UseGuards(AuthGuard('jwt'))
     @Delete('event')
     delete(@Body() id: number) {

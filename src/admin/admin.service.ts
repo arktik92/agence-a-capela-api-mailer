@@ -19,86 +19,71 @@ export class AdminService {
     ) {}
 
     async signup(user: User): Promise<{data: string}> {
+        /* Search if email exist */
         const userDTO = await this.usersRepository.findOneBy({email: user.email})
-
         if (userDTO) throw new UnauthorizedException('This email is already registered')
-
+        /* Hash password */
         const saltRounds = 10
         const salt = await bcrypt.genSalt(saltRounds)
-        
-        console.log("password to hash: ", user.password);
-        
         const hashedPassword = await bcrypt.hash(user.password, salt)
-        console.log("hashedPassword:", hashedPassword)
-
+        /* Create new User */
         const newUser = this.usersRepository.create({
             email: user.email,
             password: hashedPassword
         })
-
+        /* Save new User in DB*/
         await this.usersRepository.save(newUser)
-        
-
+        /* return message */
         return {data: "User succesfully created"}
 
     }
 
     async login(user: User): Promise<{data: string}> {
+        /* Search User to connect */
         const userDTO = await this.usersRepository.findOneBy({email: user.email})
-        
         if (!user) {
             throw new NotFoundException
         }
-        
-        // TODO: - verifier pwd avec bcrypt
-        console.log(user.password);
-        console.log(userDTO.password);
-        
+        /* Check if passwords matches */        
         const match = await bcrypt.compare(user.password, userDTO.password)
-        console.log(match);
-        
         if (!match) throw new UnauthorizedException('Passwords doesn\'t match')
-
-        // TODO creer et retourner token avec jwt
+        /* Create token */
         const payload = {
             sub: user.id,
             email: user.email, 
         }
-
         const token = this.jwtService.sign(payload, {
             expiresIn: "24h",
             secret: this.configService.get("JWT_SECRET")
         })
-
+        /* Return Token */
         return {data: token}
     }
 
     async createEvent(event: Event): Promise<{data: string}> {
-        // Add Images
-        const {title, description, image} = event
+        // TODO: - Add Images
 
+        /* Create new Event */
         const newEvent = this.eventRepository.create({
-            title,
-            description,
-            image
+            title: event.title,
+            description: event.description,
+            image: event.image
         }) 
-
+        /* Save Event */
         await this.eventRepository.save(event)
-
-
+        /* Return message */
         return {data: "Event was created successfuly"}
     }
 
     async readOne(id: number): Promise<Event> {
+        /* Find & return one event */
         return this.eventRepository.findOneBy({id})
     }
 
-    async readAll(): Promise<Event[]> {
-        return this.eventRepository.find()
-    }
-
     async delete(id: number): Promise<{data: string}> {
+        /* Delete event in DB */
         await this.eventRepository.delete(id)
+        /* Return message */
         return { data: "Event was deleted successfuly"}
     }
 }

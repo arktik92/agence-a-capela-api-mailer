@@ -6,6 +6,7 @@ import { AdminModule } from './admin/admin.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './admin/dto/User';
 import { Event } from './admin/dto/Event';
+import { EventModule } from './event/event.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { Event } from './admin/dto/Event';
       }),
     }),
     MailModule,
-    AdminModule
+    AdminModule,
+    EventModule
   ],
   controllers: [AppController]
 })
